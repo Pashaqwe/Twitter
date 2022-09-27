@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
+    "serve": "vite preview",
     "lint:l": "eslint .",
     "lint:f": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
     "prettier:c": "prettier . --check",
