@@ -13,7 +13,7 @@
     "prettier:w": "prettier . --write"
   },
   "engines": {
-    "node": "18.9.1",
+    "node": "18.x",
     "pnpm": "7.9.0"
   },
   "packageManager": "pnpm@7.9.0",
