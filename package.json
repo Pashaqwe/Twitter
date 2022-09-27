@@ -6,10 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "heroku-postbuild": "echo Skip build on Heroku",
-    "heroku-cleanup": "echo Skip build on Heroku",
-    "heroku-prebuild": "echo Skip build on Heroku",
-    "serve": "vite preview",
+    "start": "vite preview",
     "lint:l": "eslint .",
     "lint:f": "eslint . --fix --ext .js,.jsx,.ts,.tsx",
     "prettier:c": "prettier . --check",
