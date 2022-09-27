@@ -1,1 +1,1 @@
-web: pnpm run serve
+web: pnpm run start
