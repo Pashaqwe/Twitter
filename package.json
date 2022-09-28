@@ -14,9 +14,9 @@
   },
   "engines": {
     "node": "18.9.1",
-    "pnpm": "7.9.0"
+    "pnpm": "7.12.2"
   },
-  "packageManager": "pnpm@7.9.0",
+  "packageManager": "pnpm@7.12.2",
   "dependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
