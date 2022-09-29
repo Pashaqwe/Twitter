@@ -1,4 +1,4 @@
-[[plugins]]
-  package = "./plugins/pnpm-preinstaller"
 [build.environment]
-  NPM_FLAGS="--prefix=/"
+  NPM_FLAGS = "--version"
+[build]
+  command = "npx pnpm install —store=node_modules/.pnpm-store && npx pnpm build"
