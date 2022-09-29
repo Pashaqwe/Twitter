@@ -10,6 +10,7 @@ specifiers:
   eslint-config-airbnb-typescript: ^17.0.0
   eslint-config-prettier: ^8.5.0
   eslint-plugin-react: ^7.31.8
+  netlify-plugin-pnpm-preinstaller: ^0.0.4
   prettier: ^2.7.1
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -20,6 +21,7 @@ dependencies:
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   '@vitejs/plugin-react': 2.1.0_vite@3.1.3
+  netlify-plugin-pnpm-preinstaller: 0.0.4
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   typescript: 4.8.3
@@ -1957,6 +1959,12 @@ packages:
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
+
+  /netlify-plugin-pnpm-preinstaller/0.0.4:
+    resolution: {integrity: sha512-0XTMZ9hyhH5xnxCYxLifW/RKzZZQd3VXTQsLjyjtQn/7mj3M1hdSkFGmog6KIy+ujRXX45xOmP8IY/HEVIYaag==}
+    engines: {node: '>=12.18.0'}
+    hasBin: true
+    dev: false
 
   /node-releases/2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
