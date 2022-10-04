@@ -2,113 +2,102 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { useFormik } from "formik";
-import styled from "styled-components";
-import axios from "axios";
+import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import * as Yup from "yup";
+import { postRequest } from "../../api";
+import { FormValuesType, OnSubmitTypes } from "./types";
 
-const StyledButton = styled(Button)`
-  border: none !important;
-  outline: none !important;
-  background-color: rgb(143, 157, 250) !important;
-  &:hover {
-    background: rgba(143, 157, 250 0.8) !important;
-  }
-`;
-
-const StyledTextField = styled(TextField)`
-  .Mui-focused {
-    color: #4d5eb0 !important;
-  }
-  .MuiOutlinedInput-root {
-    &.Mui-focused fieldset {
-      border-color: #4d5eb0;
-    }
-  }
-
-  .MuiOutlinedInput-root {
-    &:hover {
-      .MuiOutlinedInput-notchedOutline {
-        border-color: #4d5eb0 !important;
-      }
-    }
-  }
-
-  margin-bottom: 20px !important;
+const StyledBox = styled(Box)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  min-width: 550px;
 `;
 
 function SignIn() {
   const navigate = useNavigate();
 
-  const loginRequest = async (values: any) => {
-    await axios.post("http://localhost:3000/login", values);
+  const navigateToHomePage = () => {
+    navigate("/");
   };
 
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validate: () => {},
-    onSubmit: (values, { resetForm }) => {
-      loginRequest(values).then(() => {
-        navigate("/");
-        resetForm();
-      });
-    },
+  const SignInSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Required"),
+    password: Yup.string().required("Required"),
   });
 
+  const onSubmit = (
+    values: FormValuesType,
+    { resetForm, setErrors }: OnSubmitTypes
+  ) => {
+    postRequest("/login", values)
+      .then(() => {
+        navigateToHomePage();
+        resetForm();
+      })
+      .catch((err) =>
+        setErrors({ email: err.response.data, password: err.response.data })
+      );
+  };
+
   return (
-    <Modal
-      open
-      onClose={() => {
-        navigate("/");
-      }}
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          backgroundColor: "#fff",
-          padding: "20px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <form onSubmit={formik.handleSubmit}>
-          <StyledTextField
-            variant="outlined"
-            fullWidth
-            id="email"
-            name="email"
-            label="Email"
-            value={formik.values.email}
-            error={!!formik.errors.email}
-            helperText={formik.errors.email}
-            onChange={formik.handleChange}
-            type="email"
-            size="small"
-            color="secondary"
-          />
-          <StyledTextField
-            variant="outlined"
-            fullWidth
-            id="password"
-            name="password"
-            type="password"
-            label="Password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            size="small"
-            color="secondary"
-          />
-          <StyledButton color="inherit" fullWidth type="submit">
-            Submit
-          </StyledButton>
-        </form>
-      </Box>
+    <Modal open onClose={navigateToHomePage} disableAutoFocus>
+      <StyledBox>
+        <Formik
+          initialValues={{ email: "", password: "" }}
+          onSubmit={onSubmit}
+          validationSchema={SignInSchema}
+        >
+          {({ values, errors, handleChange, handleSubmit, touched }) => (
+            <form onSubmit={handleSubmit}>
+              <h1>Sign In</h1>
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="email"
+                name="email"
+                label="Email"
+                value={values.email}
+                error={touched.email && !!errors.email}
+                helperText={touched.email && errors.email}
+                onChange={handleChange}
+                type="email"
+                size="small"
+              />
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="password"
+                name="password"
+                type="password"
+                label="Password"
+                value={values.password}
+                onChange={handleChange}
+                error={touched.password && !!errors.password}
+                helperText={touched.password && errors.password}
+                size="small"
+                margin="normal"
+              />
+              <Button
+                sx={{ marginTop: "10px" }}
+                variant="contained"
+                fullWidth
+                type="submit"
+              >
+                Submit
+              </Button>
+            </form>
+          )}
+        </Formik>
+      </StyledBox>
     </Modal>
   );
 }

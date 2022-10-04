@@ -9,6 +9,11 @@
       "email": "dovac29782@timevod.com",
       "password": "$2a$10$g/aT1z0jC63b2kNksn1E0OUjzQapw7sr.HMy0RxYyM/PSXwVgRp.C",
       "id": 6
+    },
+    {
+      "email": "pavel.votchinnikov@mircod.com",
+      "password": "$2a$10$kXDsOMhsxpp3e6cDtO5MF.tCoylnHLamCLRSrT5p.keqxYFzGuC0W",
+      "id": 7
     }
   ]
 }
