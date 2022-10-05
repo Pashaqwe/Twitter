@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import * as Yup from "yup";
 import { postRequest } from "../../api";
@@ -20,6 +20,24 @@ const StyledBox = styled(Box)`
   flex-direction: column;
   border-radius: 20px;
   min-width: 550px;
+`;
+
+const StyledRegistrationSection = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledHeading = styled.h1`
+  margin: 0;
+`;
+
+const StyledLink = styled(Link)`
+  color: #1a76d2;
+  text-decoration: none;
+  margin-left: 5px;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 function SignIn() {
@@ -58,7 +76,11 @@ function SignIn() {
         >
           {({ values, errors, handleChange, handleSubmit, touched }) => (
             <form onSubmit={handleSubmit}>
-              <h1>Sign In</h1>
+              <StyledHeading>Sign In</StyledHeading>
+              <StyledRegistrationSection>
+                <p>No account?</p>
+                <StyledLink to="/signup">Registration</StyledLink>
+              </StyledRegistrationSection>
               <TextField
                 variant="outlined"
                 fullWidth
