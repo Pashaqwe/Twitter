@@ -1,3 +1,3 @@
 export type AuthModalProps = {
-  children: JSX.Element;
+  children: React.ReactNode;
 };

@@ -7,8 +7,10 @@ import * as Yup from "yup";
 import { postRequest } from "../../api";
 import { FormValuesType, OnSubmitTypes } from "./types";
 import AuthModal from "../../components/AuthModal";
+import { emailSchema, passwordSchema } from "../../utils/validate";
+import PasswordInput from "../../components/_ui/PasswordInput";
 
-const StyledRegistrationSection = styled.div`
+const StyledSignUpLink = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -34,8 +36,8 @@ function SignIn() {
   };
 
   const SignInSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Required"),
-    password: Yup.string().required("Required"),
+    email: emailSchema,
+    password: passwordSchema,
   });
 
   const onSubmit = (
@@ -54,6 +56,11 @@ function SignIn() {
 
   return (
     <AuthModal>
+      <StyledHeading>Sign In</StyledHeading>
+      <StyledSignUpLink>
+        <p>No account?</p>
+        <StyledLink to="/signup">Registration</StyledLink>
+      </StyledSignUpLink>
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={onSubmit}
@@ -61,12 +68,8 @@ function SignIn() {
       >
         {({ values, errors, handleChange, handleSubmit, touched }) => (
           <form onSubmit={handleSubmit}>
-            <StyledHeading>Sign In</StyledHeading>
-            <StyledRegistrationSection>
-              <p>No account?</p>
-              <StyledLink to="/signup">Registration</StyledLink>
-            </StyledRegistrationSection>
             <TextField
+              sx={{ marginBottom: "10px" }}
               variant="outlined"
               fullWidth
               id="email"
@@ -79,19 +82,18 @@ function SignIn() {
               type="email"
               size="small"
             />
-            <TextField
+            <PasswordInput
+              sx={{ marginBottom: "10px" }}
               variant="outlined"
               fullWidth
               id="password"
               name="password"
-              type="password"
               label="Password"
               value={values.password}
               onChange={handleChange}
               error={touched.password && !!errors.password}
               helperText={touched.password && errors.password}
               size="small"
-              margin="normal"
             />
             <Button
               sx={{ marginTop: "10px" }}
