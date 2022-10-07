@@ -13,6 +13,7 @@
     "prettier:w": "prettier . --write"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.7",
     "@mui/styled-engine-sc": "^5.10.6",
     "@vitejs/plugin-react": "^2.1.0",
